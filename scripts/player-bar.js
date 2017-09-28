@@ -12,7 +12,8 @@ $( document ) .ready(function() {
     const nextSong = album.songs[nextSongIndex];
     player.playPause(nextSong);
   });
-  $('button#previous').click( function() {
+  });
+  /*$('button#previous').click( function() {
     if(player.playState !== 'playing') { return; }
 
     const currentSongIndex = album.songs.indexOf(player.currentlyPlaying);
