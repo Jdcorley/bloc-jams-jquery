@@ -4,21 +4,23 @@ $( document ) .ready(function() {
     $(this).attr('playState', player.playState);
   });
   $('button#next').click( function() {
-    if (player.playState !== 'playing') { return; }
 
-    const currentSongIndex = album.songs.indexOf(player.currentlyPlaying);
-    const nextSongIndex = currentSongIndex + 1;
-    if (nextSongIndex >= album.length) { return; }
-    const nextSong = album.songs[nextSongIndex];
+    var currentSongIndex = album.songs.indexOf(player.currentlyPlaying);
+    var nextSongIndex = currentSongIndex + 1;
+    if (nextSongIndex >= album.songs.length) {
+      nextSongIndex =  0;
+     }
+    var nextSong = album.songs[nextSongIndex];
     player.playPause(nextSong);
   });
   $('button#previous').click( function() {
-    if(player.playState !== 'playing') { return; }
 
-    const currentSongIndex = album.songs.indexOf(player.currentlyPlaying);
-    const previousSongIndex = currentSongIndex - 1;
-    if (previousSongIndex >= 0) { return; };
-    const previousSong = album.songs[previousSongIndex];
+    var currentSongIndex = album.songs.indexOf(player.currentlyPlaying);
+    var previousSongIndex = currentSongIndex - 1;
+    if (previousSongIndex < 0) {
+      previousSongIndex = album.songs.length - 1;
+    }
+    var previousSong = album.songs[previousSongIndex];
     player.playPause(previousSong);
   });
   $('#time-control input').on('input', function (event){
@@ -29,15 +31,15 @@ $( document ) .ready(function() {
    });
   setInterval ( () => {
 
-    const currentTime = player.getTime();
-    const duration = player.getDuration();
-    const minutesDuration = Math.floor(duration / 60);
-    const secondsDuration = Math.round(duration % 60);
-    const prettyDuration = minutesDuration+":"+secondsDuration;
-    const minutes = Math.floor(currentTime / 60);
-    const seconds = Math.round(currentTime % 60);
-    const prettyTime = minutes+":"+seconds;
-    const percent = (currentTime / duration) * 100;
+    var currentTime = player.getTime();
+    var duration = player.getDuration();
+    var minutesDuration = Math.floor(duration / 60);
+    var secondsDuration = Math.round(duration % 60);
+    var prettyDuration = minutesDuration+":"+secondsDuration;
+    var minutes = Math.floor(currentTime / 60);
+    var seconds = Math.round(currentTime % 60);
+    var prettyTime = minutes+":"+seconds;
+    var percent = (currentTime / duration) * 100;
     $('#time-control .total-time').text(prettyDuration);
     $('#time-control .current-time').text( prettyTime );
     $('#time-control input').val(percent);

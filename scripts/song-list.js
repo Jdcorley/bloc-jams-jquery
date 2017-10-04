@@ -10,7 +10,7 @@ $( document ) .ready(function(){
           </button>
         </td>
         <td>${song.title}</td>
-        <td>${song.duration}</td>
+        <td>${formater(song.duration)}</td>
       </tr>
       `);
 
@@ -22,3 +22,9 @@ $( document ) .ready(function(){
     $('#song-list').append(song.element);
   });
 });
+function formater(duration){
+  var minutesDuration = Math.floor(duration / 60);
+  var secondsDuration = Math.round(duration % 60);
+  var prettyDuration = minutesDuration+":"+secondsDuration;
+  return prettyDuration;
+}
